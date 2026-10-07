@@ -13,7 +13,7 @@ header{background:#050607;padding:22px 30px 17px;display:flex;justify-content:sp
 main{max-width:1500px;margin:24px auto;padding:0 24px}.dashboard{display:grid;grid-template-columns:315px 1.4fr 1fr 1fr;gap:16px;align-items:start}.stack{display:flex;flex-direction:column;gap:16px}.card{background:linear-gradient(145deg,#0d1114,#080a0c);border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:0 6px 24px #0008}.card h2{font-size:18px;margin-bottom:14px}.titleRow{display:flex;align-items:center;gap:10px}.titleIcon{color:var(--red);font-size:25px;font-weight:900}
 .cameraBox{position:relative;background:#020304;border-radius:11px;overflow:hidden;aspect-ratio:4/3;border:1px solid #2c3339}.cameraBox video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block}.cameraOverlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform:scaleX(-1)}.cameraMsg{position:absolute;bottom:8px;left:8px;right:8px;background:#000b;padding:9px;border-radius:8px;font-size:12px;text-align:center}.controls{display:flex;gap:9px;margin-top:11px}.btn{flex:1;border:1px solid var(--red);border-radius:10px;padding:11px 10px;font-weight:700;cursor:pointer;background:var(--red);color:white}.btn.secondary{background:#101417;color:#eee;border-color:#384047}.btn:disabled{opacity:.45;cursor:not-allowed}.active{display:flex;align-items:center;gap:8px;margin-top:12px;color:#ddd;font-size:13px}.dot{width:11px;height:11px;background:#20dc75;border-radius:50%;display:inline-block;box-shadow:0 0 10px #20dc75}.dot.off{background:#777;box-shadow:none}
 .fingerBox{background:#101417;border:1px solid #30373d;border-radius:11px;padding:13px;margin-top:10px;display:flex;align-items:center;gap:12px}.fingerGraphic{font-size:37px;color:#aeb7c1}.fingerNum{font-size:26px;font-weight:800}.fingerLabel{color:#aaa;font-size:12px;margin-top:3px}.placeholder{min-height:120px;display:flex;align-items:center;justify-content:center;text-align:center;color:#c8cdd2;font-size:13px;background:#0a0d0f;border:1px solid #30373d;border-radius:11px;padding:18px;margin-top:10px}.instructions li{margin:9px 0 0 18px;font-size:13px;line-height:1.35;color:#e1e4e7}
-.info{display:grid;grid-template-columns:1fr;gap:10px}.field{background:#101417;border:1px solid #272e34;border-radius:11px;padding:11px}.field span{display:block;font-size:12px;color:#b2b9c0;margin-bottom:5px}.field b{font-size:14px;color:#f1f1f1}
+.info{display:grid;grid-template-columns:1fr;gap:10px}.intervalRow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.paramInput{width:100%;margin-top:2px;background:#080b0d;color:#fff;border:1px solid #3a4249;border-radius:8px;padding:9px;font-size:14px;outline:none}.paramInput:focus{border-color:var(--red);box-shadow:0 0 0 2px #ff263322}.paramHelp{font-size:11px;line-height:1.45;color:#9fa7af;background:#0a0d0f;border:1px solid #252c32;border-radius:9px;padding:9px}.field{background:#101417;border:1px solid #272e34;border-radius:11px;padding:11px}.field span{display:block;font-size:12px;color:#b2b9c0;margin-bottom:5px}.field b{font-size:14px;color:#f1f1f1}
 .graph{width:100%;height:270px;border:1px solid #30373d;border-radius:11px;background:#080b0d}.status{padding:12px;border-radius:10px;background:#101417;border-left:4px solid var(--red);font-size:13px;margin-top:10px;color:#ddd}.status strong{color:white}.resultBox{min-height:270px;display:flex;flex-direction:column;justify-content:center;gap:24px}.resultLine{font-size:16px}.resultLine b{display:block;font-size:14px;color:#bbb;margin-bottom:7px}.resultLine .value{font-size:22px;color:white}.resultLine .red{color:var(--red)}
 .interactionGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.interaction{background:#090c0e;border:1px solid var(--red);border-radius:12px;padding:15px;text-align:center;min-height:130px;display:flex;flex-direction:column;justify-content:center;gap:8px}.interaction .big{font-size:30px;color:var(--red)}.interaction b{font-size:16px}.interaction small{color:#b6bcc2;font-size:12px;line-height:1.3}.footer{text-align:center;color:#6f7881;font-size:12px;margin:18px 0}
 .welcome{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:20;display:flex;align-items:center;justify-content:center;padding:20px}.welcome.hidden{display:none}.welcomeBox{max-width:560px;width:100%;background:linear-gradient(145deg,#111518,#080a0c);border:1px solid #343a40;border-top:4px solid var(--red);border-radius:20px;padding:32px;text-align:center;box-shadow:0 20px 80px #000}.welcomeIcon{font-size:55px;color:var(--red);margin-bottom:12px}.welcome h1{font-size:28px;margin-bottom:10px}.welcome p{color:#c6cbd0;line-height:1.5;margin-bottom:20px}.steps{text-align:left;background:#0d1114;border:1px solid #2a3035;border-radius:12px;padding:16px;margin-bottom:20px}.steps div{margin:10px 0;color:#eee}.stepNum{display:inline-flex;width:25px;height:25px;border-radius:50%;background:var(--red);align-items:center;justify-content:center;font-weight:bold;margin-right:8px}.permissionNote{font-size:12px;color:#929aa2;margin-top:12px}.error{color:#ff6972}
@@ -77,7 +77,16 @@ main{max-width:1500px;margin:24px auto;padding:0 24px}.dashboard{display:grid;gr
   <div class="stack">
     <section class="card">
       <div class="titleRow"><span class="titleIcon">ƒ</span><h2>Función y parámetros</h2></div>
-      <div class="info"><div class="field"><span>Función:</span><b id="funcion">No definida</b></div><div class="field"><span>Intervalo [a, b]:</span><b id="intervalo">No definido</b></div><div class="field"><span>Eje de revolución:</span><b id="eje">No definido</b></div></div>
+      <div class="info">
+        <div class="field"><span>Función f(x):</span><input id="funcInput" class="paramInput" value="x^2" placeholder="Ej: x^2 + 2*x"></div>
+        <div class="intervalRow">
+          <div class="field"><span>Inicio a:</span><input id="aInput" class="paramInput" type="number" step="any" value="-2"></div>
+          <div class="field"><span>Final b:</span><input id="bInput" class="paramInput" type="number" step="any" value="2"></div>
+        </div>
+        <div class="field"><span>Eje de revolución:</span><select id="ejeInput" class="paramInput"><option value="x">Eje X</option><option value="y">Eje Y</option></select></div>
+        <button class="btn" id="plotBtn">Graficar intervalo</button>
+        <div class="paramHelp">Puedes escribir cualquier intervalo numérico, por ejemplo <b>[-5, 3]</b>, <b>[0, 10]</b> o <b>[-π, π]</b>. La gráfica se ajusta automáticamente.</div>
+      </div>
     </section>
     <section class="card">
       <div class="titleRow"><span class="titleIcon">▱</span><h2>Sólido de revolución (3D)</h2></div>
@@ -142,8 +151,69 @@ const actions={
   5:['Longitud de arco','Longitud de la curva en el intervalo','🖐']
 };
 
-function drawGraph(){const c=document.getElementById('graph'),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.strokeStyle='#242b30';x.lineWidth=1;for(let i=0;i<=10;i++){let px=i*w/10,py=i*h/10;x.beginPath();x.moveTo(px,0);x.lineTo(px,h);x.stroke();x.beginPath();x.moveTo(0,py);x.lineTo(w,py);x.stroke()}x.strokeStyle='#8e99a4';x.beginPath();x.moveTo(35,h/2);x.lineTo(w-20,h/2);x.moveTo(w/2,15);x.lineTo(w/2,h-15);x.stroke();x.fillStyle='#d4d8dc';x.font='15px Arial';x.fillText('La gráfica se mostrará',w/2-80,h/2-7);x.fillText('al ejecutar una interacción',w/2-105,h/2+16)}
-drawGraph();
+function normalizeExpr(expr){
+  let e=expr.trim().toLowerCase().replace(/π/g,'pi').replace(/−/g,'-');
+  e=e.replace(/\^/g,'**').replace(/\bln\b/g,'Math.log').replace(/\blog\b/g,'Math.log10');
+  e=e.replace(/\bsin\b/g,'Math.sin').replace(/\bcos\b/g,'Math.cos').replace(/\btan\b/g,'Math.tan');
+  e=e.replace(/\bsqrt\b/g,'Math.sqrt').replace(/\babs\b/g,'Math.abs').replace(/\bexp\b/g,'Math.exp');
+  e=e.replace(/\bpi\b/g,'Math.PI').replace(/\be\b/g,'Math.E');
+  return e;
+}
+function makeFunction(expr){
+  const e=normalizeExpr(expr);
+  if(!/^[0-9x+\-*/().,\s_*MathPIEagcosinqrtlbpexp]+$/.test(e)) throw new Error('La función contiene caracteres no permitidos.');
+  const fn=new Function('x','return ('+e+');');
+  const test=fn(0);
+  if(typeof test!=='number' || Number.isNaN(test)) throw new Error('No se pudo interpretar la función.');
+  return fn;
+}
+function readParams(){
+  const expr=document.getElementById('funcInput').value.trim() || 'x^2';
+  let a=parseFloat(document.getElementById('aInput').value), b=parseFloat(document.getElementById('bInput').value);
+  if(Number.isNaN(a)||Number.isNaN(b)) throw new Error('Escribe valores numéricos para a y b.');
+  if(a===b) throw new Error('El intervalo debe tener dos extremos diferentes.');
+  if(a>b){const t=a;a=b;b=t;document.getElementById('aInput').value=a;document.getElementById('bInput').value=b;}
+  return {expr,a,b,fn:makeFunction(expr),axis:document.getElementById('ejeInput').value};
+}
+function drawGraph(params){
+  const c=document.getElementById('graph'),x=c.getContext('2d'),w=c.width,h=c.height;
+  x.clearRect(0,0,w,h);
+  const n=700, pts=[]; let ymin=Infinity,ymax=-Infinity;
+  for(let i=0;i<=n;i++){const xv=params.a+(params.b-params.a)*i/n; let yv; try{yv=params.fn(xv)}catch{yv=NaN} if(Number.isFinite(yv)&&Math.abs(yv)<1e7){pts.push([xv,yv]);ymin=Math.min(ymin,yv);ymax=Math.max(ymax,yv)} else pts.push([xv,NaN]);}
+  if(!Number.isFinite(ymin)||!Number.isFinite(ymax)){drawEmptyGraph(x,'No se pudo graficar esta función en el intervalo.');return;}
+  if(Math.abs(ymax-ymin)<1e-9){ymin-=1;ymax+=1;} else {const pad=(ymax-ymin)*0.12;ymin-=pad;ymax+=pad;}
+  const xr=params.b-params.a, yr=ymax-ymin;
+  const sx=v=>(v-params.a)/xr*w, sy=v=>h-(v-ymin)/yr*h;
+  x.strokeStyle='#20272d';x.lineWidth=1;
+  for(let i=0;i<=10;i++){let px=i*w/10,py=i*h/10;x.beginPath();x.moveTo(px,0);x.lineTo(px,h);x.stroke();x.beginPath();x.moveTo(0,py);x.lineTo(w,py);x.stroke();}
+  if(params.a<=0&&params.b>=0){let px=sx(0);x.strokeStyle='#9aa3ad';x.lineWidth=1.5;x.beginPath();x.moveTo(px,0);x.lineTo(px,h);x.stroke();}
+  if(ymin<=0&&ymax>=0){let py=sy(0);x.strokeStyle='#9aa3ad';x.lineWidth=1.5;x.beginPath();x.moveTo(0,py);x.lineTo(w,py);x.stroke();}
+  // Área sombreada para la interacción de 1 dedo.
+  x.fillStyle='rgba(255,38,51,.18)';x.beginPath();let started=false;
+  for(const [xx,yy] of pts){if(!Number.isFinite(yy)){started=false;continue}let px=sx(xx),py=sy(yy),p0=sy(0);if(!started){x.moveTo(px,p0);x.lineTo(px,py);started=true}else{x.lineTo(px,py);}}
+  if(started){x.lineTo(sx(params.b),sy(0));x.closePath();x.fill();}
+  x.strokeStyle='#ff2633';x.lineWidth=3;x.beginPath();started=false;
+  for(const [xx,yy] of pts){if(!Number.isFinite(yy)){started=false;continue}let px=sx(xx),py=sy(yy);if(!started){x.moveTo(px,py);started=true}else{x.lineTo(px,py);}}
+  x.stroke();
+  x.fillStyle='#d8dde1';x.font='12px Arial';x.fillText(String(params.a),5,h-7);x.fillText(String(params.b),w-35,h-7);x.fillText('x',w-15,h/2-6);x.fillText('y',w/2+6,14);
+}
+function drawEmptyGraph(x,msg){const c=document.getElementById('graph'),w=c.width,h=c.height;x.fillStyle='#d4d8dc';x.font='14px Arial';x.textAlign='center';x.fillText(msg,w/2,h/2);x.textAlign='left';}
+let currentParams={expr:'x^2',a:-2,b:2,fn:x=>x*x,axis:'x'};
+function updateParams(){
+  try{
+    currentParams=readParams();
+    document.getElementById('funcion').textContent=currentParams.expr;
+    document.getElementById('intervalo').textContent='['+currentParams.a+', '+currentParams.b+']';
+    document.getElementById('eje').textContent=currentParams.axis==='x'?'Eje X':'Eje Y';
+    drawGraph(currentParams);
+    document.getElementById('cameraStatus').innerHTML='<strong>Gráfica actualizada:</strong> '+currentParams.expr+' en ['+currentParams.a+', '+currentParams.b+'].';
+  }catch(e){document.getElementById('cameraStatus').innerHTML='<strong class="error">Error:</strong> '+e.message;}
+}
+document.getElementById('plotBtn').addEventListener('click',updateParams);
+document.getElementById('aInput').addEventListener('keydown',e=>{if(e.key==='Enter')updateParams()});
+document.getElementById('bInput').addEventListener('keydown',e=>{if(e.key==='Enter')updateParams()});
+document.getElementById('funcInput').addEventListener('keydown',e=>{if(e.key==='Enter')updateParams()});
+updateParams();
 
 // Cuenta los dedos usando los puntos de referencia de MediaPipe.
 function countFingers(lm){
@@ -158,8 +228,10 @@ function countFingers(lm){
   return Math.max(0,Math.min(5,count));
 }
 
+function numericalIntegral(fn,a,b){const n=1000;const h=(b-a)/n;let sum=fn(a)+fn(b);for(let i=1;i<n;i++)sum+=(i%2?4:2)*fn(a+i*h);return sum*h/3;}
 function updateGesture(count){
   dedos.textContent=count;
+  if(count===1){try{const val=numericalIntegral(currentParams.fn,currentParams.a,currentParams.b);document.getElementById('integral').textContent='∫ f(x) dx';document.getElementById('resultado').textContent=Number.isFinite(val)?val.toFixed(4):'—';document.getElementById('unidades').textContent='u²';}catch{}}
   if(count>=1 && count<=5){
     const a=actions[count];
     accion.innerHTML='<b>'+a[0]+'</b><br><span style="color:#b6bcc2;font-size:12px">'+a[1]+'</span>';
