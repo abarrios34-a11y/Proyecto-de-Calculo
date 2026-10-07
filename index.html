@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INTEGRAGESTOS — Cálculo integral en movimiento</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#ff2633;--red2:#e50914;--bg:#050607;--panel:#0b0e10;--panel2:#101417;--line:#252b30;--text:#f5f5f5;--muted:#9aa3ad}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:#050607;padding:22px 30px 17px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--red);box-shadow:0 4px 20px #000}
+.brand{display:flex;align-items:center;gap:15px}.logoMark{font-size:44px;color:var(--red);font-weight:900;line-height:1}.logo{font-size:31px;font-weight:900;letter-spacing:.8px}.logo .red{color:var(--red)}.tag{font-size:15px;color:#ddd;margin-top:5px}.headerRight{font-size:15px;color:#eee;text-align:right}.handIcon{font-size:36px;color:var(--red);vertical-align:middle;margin-right:8px}
+main{max-width:1500px;margin:24px auto;padding:0 24px}.dashboard{display:grid;grid-template-columns:315px 1.4fr 1fr 1fr;gap:16px;align-items:start}.stack{display:flex;flex-direction:column;gap:16px}.card{background:linear-gradient(145deg,#0d1114,#080a0c);border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:0 6px 24px #0008}.card h2{font-size:18px;margin-bottom:14px}.titleRow{display:flex;align-items:center;gap:10px}.titleIcon{color:var(--red);font-size:25px;font-weight:900}
+.cameraBox{position:relative;background:#020304;border-radius:11px;overflow:hidden;aspect-ratio:4/3;border:1px solid #2c3339}.cameraBox video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block}.cameraOverlay{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform:scaleX(-1)}.cameraMsg{position:absolute;bottom:8px;left:8px;right:8px;background:#000b;padding:9px;border-radius:8px;font-size:12px;text-align:center}.controls{display:flex;gap:9px;margin-top:11px}.btn{flex:1;border:1px solid var(--red);border-radius:10px;padding:11px 10px;font-weight:700;cursor:pointer;background:var(--red);color:white}.btn.secondary{background:#101417;color:#eee;border-color:#384047}.btn:disabled{opacity:.45;cursor:not-allowed}.active{display:flex;align-items:center;gap:8px;margin-top:12px;color:#ddd;font-size:13px}.dot{width:11px;height:11px;background:#20dc75;border-radius:50%;display:inline-block;box-shadow:0 0 10px #20dc75}.dot.off{background:#777;box-shadow:none}
+.fingerBox{background:#101417;border:1px solid #30373d;border-radius:11px;padding:13px;margin-top:10px;display:flex;align-items:center;gap:12px}.fingerGraphic{font-size:37px;color:#aeb7c1}.fingerNum{font-size:26px;font-weight:800}.fingerLabel{color:#aaa;font-size:12px;margin-top:3px}.placeholder{min-height:120px;display:flex;align-items:center;justify-content:center;text-align:center;color:#c8cdd2;font-size:13px;background:#0a0d0f;border:1px solid #30373d;border-radius:11px;padding:18px;margin-top:10px}.instructions li{margin:9px 0 0 18px;font-size:13px;line-height:1.35;color:#e1e4e7}
+.info{display:grid;grid-template-columns:1fr;gap:10px}.field{background:#101417;border:1px solid #272e34;border-radius:11px;padding:11px}.field span{display:block;font-size:12px;color:#b2b9c0;margin-bottom:5px}.field b{font-size:14px;color:#f1f1f1}
+.graph{width:100%;height:270px;border:1px solid #30373d;border-radius:11px;background:#080b0d}.status{padding:12px;border-radius:10px;background:#101417;border-left:4px solid var(--red);font-size:13px;margin-top:10px;color:#ddd}.status strong{color:white}.resultBox{min-height:270px;display:flex;flex-direction:column;justify-content:center;gap:24px}.resultLine{font-size:16px}.resultLine b{display:block;font-size:14px;color:#bbb;margin-bottom:7px}.resultLine .value{font-size:22px;color:white}.resultLine .red{color:var(--red)}
+.interactionGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.interaction{background:#090c0e;border:1px solid var(--red);border-radius:12px;padding:15px;text-align:center;min-height:130px;display:flex;flex-direction:column;justify-content:center;gap:8px}.interaction .big{font-size:30px;color:var(--red)}.interaction b{font-size:16px}.interaction small{color:#b6bcc2;font-size:12px;line-height:1.3}.footer{text-align:center;color:#6f7881;font-size:12px;margin:18px 0}
+.welcome{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:20;display:flex;align-items:center;justify-content:center;padding:20px}.welcome.hidden{display:none}.welcomeBox{max-width:560px;width:100%;background:linear-gradient(145deg,#111518,#080a0c);border:1px solid #343a40;border-top:4px solid var(--red);border-radius:20px;padding:32px;text-align:center;box-shadow:0 20px 80px #000}.welcomeIcon{font-size:55px;color:var(--red);margin-bottom:12px}.welcome h1{font-size:28px;margin-bottom:10px}.welcome p{color:#c6cbd0;line-height:1.5;margin-bottom:20px}.steps{text-align:left;background:#0d1114;border:1px solid #2a3035;border-radius:12px;padding:16px;margin-bottom:20px}.steps div{margin:10px 0;color:#eee}.stepNum{display:inline-flex;width:25px;height:25px;border-radius:50%;background:var(--red);align-items:center;justify-content:center;font-weight:bold;margin-right:8px}.permissionNote{font-size:12px;color:#929aa2;margin-top:12px}.error{color:#ff6972}
+@media(max-width:1150px){.dashboard{grid-template-columns:1fr 1fr}.interactionGrid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){header{padding:17px}.headerRight{display:none}.logo{font-size:25px}.dashboard{grid-template-columns:1fr}.interactionGrid{grid-template-columns:1fr 1fr}main{padding:0 12px}.welcomeBox{padding:24px}}
+</style>
+</head>
+<body>
+<div class="welcome" id="welcome">
+  <div class="welcomeBox">
+    <div class="welcomeIcon">✋</div>
+    <h1>Bienvenido a INTEGRAGESTOS</h1>
+    <p>Para comenzar, debes activar la cámara. Después coloca una sola mano frente a la cámara y muestra de <b>1 a 5 dedos</b> para ejecutar las diferentes interacciones.</p>
+    <div class="steps">
+      <div><span class="stepNum">1</span> Presiona <b>Activar cámara</b>.</div>
+      <div><span class="stepNum">2</span> Acepta el permiso de cámara del navegador.</div>
+      <div><span class="stepNum">3</span> Coloca tu mano completa frente a la cámara.</div>
+      <div><span class="stepNum">4</span> Mantén la mano quieta durante un instante.</div>
+      <div><span class="stepNum">5</span> La aplicación contará automáticamente tus dedos.</div>
+    </div>
+    <button class="btn" id="welcomeStart">Activar cámara y comenzar</button>
+    <div class="permissionNote">Si el navegador pregunta si permites usar la cámara, selecciona <b>Permitir</b>.</div>
+  </div>
+</div>
+
+<header>
+  <div class="brand"><div class="logoMark">∞</div><div><div class="logo">INTEGRA<span class="red">GESTOS</span></div><div class="tag">Cálculo integral en movimiento</div></div></div>
+  <div class="headerRight"><span class="handIcon">✋</span> Tu mano,<br>tus cálculos</div>
+</header>
+<main>
+<div class="dashboard">
+  <div class="stack">
+    <section class="card">
+      <div class="titleRow"><span class="titleIcon">▣</span><h2>Cámara</h2></div>
+      <div class="controls"><button class="btn" id="start">Activar cámara</button><button class="btn secondary" id="stop" disabled>Detener cámara</button></div>
+      <div class="active"><span class="dot off" id="cameraDot"></span><span id="cameraState">Cámara inactiva</span></div>
+      <div class="status" id="cameraStatus"><strong>Antes de comenzar:</strong> activa la cámara y permite el acceso cuando el navegador lo solicite.</div>
+    </section>
+    <section class="card">
+      <div class="titleRow"><span class="titleIcon">✋</span><h2>Reconocimiento de mano</h2></div>
+      <div class="fingerBox"><div class="fingerGraphic">✋</div><div><div>Dedos detectados:</div><div class="fingerNum" id="dedos">0</div><div class="fingerLabel" id="handStatus">Esperando cámara...</div></div></div>
+      <div class="placeholder" id="handMessage">Primero activa la cámara.<br>Después coloca una mano completa y bien iluminada.</div>
+    </section>
+    <section class="card">
+      <div class="titleRow"><span class="titleIcon">ⓘ</span><h2>Instrucciones de uso</h2></div>
+      <ol class="instructions"><li>Activa la cámara y permite el acceso.</li><li>Coloca una sola mano completa frente a la cámara.</li><li>Mantén los dedos separados y visibles.</li><li>La aplicación detectará de 1 a 5 dedos.</li><li>Observa la acción, gráfica y resultado.</li></ol>
+    </section>
+  </div>
+
+  <div class="stack">
+    <section class="card">
+      <div class="titleRow"><span class="titleIcon">●</span><h2>Vista de la cámara</h2></div>
+      <div class="cameraBox"><video id="video" autoplay playsinline muted></video><canvas id="overlay" class="cameraOverlay"></canvas><div class="cameraMsg" id="cameraMsg">Activa la cámara y coloca una mano frente a ella.</div></div>
+    </section>
+    <section class="card">
+      <div class="titleRow"><span class="titleIcon">✋</span><h2>Interacción actual</h2></div>
+      <div class="placeholder" style="min-height:190px"><div><div style="font-size:45px;color:#9ca6b0;margin-bottom:10px" id="gestureIcon">✋</div><div id="accion">Muestra un gesto con 1 a 5 dedos<br>para ejecutar una acción.</div></div></div>
+    </section>
+  </div>
+
+  <div class="stack">
+    <section class="card">
+      <div class="titleRow"><span class="titleIcon">ƒ</span><h2>Función y parámetros</h2></div>
+      <div class="info"><div class="field"><span>Función:</span><b id="funcion">No definida</b></div><div class="field"><span>Intervalo [a, b]:</span><b id="intervalo">No definido</b></div><div class="field"><span>Eje de revolución:</span><b id="eje">No definido</b></div></div>
+    </section>
+    <section class="card">
+      <div class="titleRow"><span class="titleIcon">▱</span><h2>Sólido de revolución (3D)</h2></div>
+      <div class="placeholder" style="height:270px"><div>El sólido se mostrará<br>al ejecutar una interacción</div></div>
+    </section>
+  </div>
+
+  <div class="stack">
+    <section class="card">
+      <div class="titleRow"><span class="titleIcon">▱</span><h2>Gráfica 2D</h2></div>
+      <canvas id="graph" class="graph" width="600" height="270"></canvas>
+    </section>
+    <section class="card">
+      <div class="titleRow"><span class="titleIcon">Σ</span><h2>Resultado</h2></div>
+      <div class="resultBox"><div class="resultLine"><b>Integral:</b><span class="value" id="integral">—</span></div><div class="resultLine"><b>Resultado:</b><span class="value red" id="resultado">—</span></div><div class="resultLine"><b>Unidades:</b><span class="value" id="unidades">—</span></div></div>
+    </section>
+  </div>
+</div>
+
+<section class="card" style="margin-top:16px">
+  <div class="titleRow"><span class="titleIcon">ϟ</span><h2>Las 5 interacciones</h2></div>
+  <div class="interactionGrid">
+    <div class="interaction"><div class="big">☝</div><b>1 dedo</b><small>Área bajo la curva</small></div>
+    <div class="interaction"><div class="big">✌</div><b>2 dedos</b><small>Volumen alrededor<br>del eje X</small></div>
+    <div class="interaction"><div class="big">🤟</div><b>3 dedos</b><small>Volumen alrededor<br>del eje Y</small></div>
+    <div class="interaction"><div class="big">🖖</div><b>4 dedos</b><small>Área superficial</small></div>
+    <div class="interaction"><div class="big">🖐</div><b>5 dedos</b><small>Longitud de arco</small></div>
+  </div>
+</section>
+<div class="footer">INTEGRAGESTOS · Cálculo integral en movimiento</div>
+</main>
+
+<!-- MediaPipe Hands: reconocimiento real de la mano mediante la cámara -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script>
+const video=document.getElementById('video');
+const overlay=document.getElementById('overlay');
+const ctx=overlay.getContext('2d');
+const start=document.getElementById('start');
+const stop=document.getElementById('stop');
+const welcome=document.getElementById('welcome');
+const welcomeStart=document.getElementById('welcomeStart');
+const cameraState=document.getElementById('cameraState');
+const cameraDot=document.getElementById('cameraDot');
+const cameraMsg=document.getElementById('cameraMsg');
+const cameraStatus=document.getElementById('cameraStatus');
+const dedos=document.getElementById('dedos');
+const handStatus=document.getElementById('handStatus');
+const handMessage=document.getElementById('handMessage');
+const accion=document.getElementById('accion');
+const gestureIcon=document.getElementById('gestureIcon');
+let stream=null, camera=null, running=false, lastCount=-1, stableCount=0, stableFrames=0;
+
+const actions={
+  1:['Área bajo la curva','Integral definida y área geométrica','☝'],
+  2:['Volumen alrededor del eje X','Volumen por discos o arandelas','✌'],
+  3:['Volumen alrededor del eje Y','Volumen por capas cilíndricas o arandelas','🤟'],
+  4:['Área superficial','Área superficial del sólido de revolución','🖖'],
+  5:['Longitud de arco','Longitud de la curva en el intervalo','🖐']
+};
+
+function drawGraph(){const c=document.getElementById('graph'),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.strokeStyle='#242b30';x.lineWidth=1;for(let i=0;i<=10;i++){let px=i*w/10,py=i*h/10;x.beginPath();x.moveTo(px,0);x.lineTo(px,h);x.stroke();x.beginPath();x.moveTo(0,py);x.lineTo(w,py);x.stroke()}x.strokeStyle='#8e99a4';x.beginPath();x.moveTo(35,h/2);x.lineTo(w-20,h/2);x.moveTo(w/2,15);x.lineTo(w/2,h-15);x.stroke();x.fillStyle='#d4d8dc';x.font='15px Arial';x.fillText('La gráfica se mostrará',w/2-80,h/2-7);x.fillText('al ejecutar una interacción',w/2-105,h/2+16)}
+drawGraph();
+
+// Cuenta los dedos usando los puntos de referencia de MediaPipe.
+function countFingers(lm){
+  let count=0;
+  // Índice, medio, anular y meñique: punta por encima de la articulación PIP.
+  const fingers=[[8,6],[12,10],[16,14],[20,18]];
+  for(const [tip,pip] of fingers){ if(lm[tip].y < lm[pip].y - 0.025) count++; }
+  // Pulgar: compara la posición de la punta con la articulación IP según el lado de la mano.
+  const handed=window.__handedness || 'Right';
+  if(handed==='Right'){ if(lm[4].x < lm[3].x - 0.025) count++; }
+  else { if(lm[4].x > lm[3].x + 0.025) count++; }
+  return Math.max(0,Math.min(5,count));
+}
+
+function updateGesture(count){
+  dedos.textContent=count;
+  if(count>=1 && count<=5){
+    const a=actions[count];
+    accion.innerHTML='<b>'+a[0]+'</b><br><span style="color:#b6bcc2;font-size:12px">'+a[1]+'</span>';
+    gestureIcon.textContent=a[2];
+    handMessage.innerHTML='<b>Mano detectada correctamente.</b><br>Gesto reconocido: '+count+' dedo'+(count===1?'':'s')+'.';
+  }else{
+    accion.innerHTML='Muestra un gesto con <b>1 a 5 dedos</b><br>para ejecutar una acción.';
+    gestureIcon.textContent='✋';
+    handMessage.innerHTML='No se detecta una cantidad válida.<br>Coloca la mano completa y separa los dedos.';
+  }
+}
+
+function onResults(results){
+  if(!running) return;
+  overlay.width=video.videoWidth||640; overlay.height=video.videoHeight||480;
+  ctx.clearRect(0,0,overlay.width,overlay.height);
+  if(results.multiHandLandmarks && results.multiHandLandmarks.length){
+    const lm=results.multiHandLandmarks[0];
+    window.__handedness=(results.multiHandedness&&results.multiHandedness[0]&&results.multiHandedness[0].label)||'Right';
+    drawConnectors(ctx,lm,HAND_CONNECTIONS,{color:'#ff2633',lineWidth:4});
+    drawLandmarks(ctx,lm,{color:'#ffffff',fillColor:'#ff2633',lineWidth:1,radius:4});
+    const c=countFingers(lm);
+    handStatus.textContent='Mano detectada';
+    if(c===lastCount) stableFrames++; else {lastCount=c;stableFrames=0;}
+    // Evita cambios por pequeños movimientos de la mano.
+    if(stableFrames>=3 || c===0){stableCount=c;updateGesture(stableCount);}
+    cameraMsg.textContent='Mano detectada. Dedos: '+c;
+  }else{
+    handStatus.textContent='Buscando mano...';
+    handMessage.innerHTML='No encuentro una mano.<br>Acércala, ilumínala bien y mantén los dedos visibles.';
+    cameraMsg.textContent='Buscando una mano frente a la cámara...';
+    dedos.textContent='0';
+    accion.innerHTML='Muestra un gesto con <b>1 a 5 dedos</b><br>para ejecutar una acción.';
+    gestureIcon.textContent='✋';
+    ctx.clearRect(0,0,overlay.width,overlay.height);
+  }
+}
+
+const hands=new Hands({locateFile:(file)=>`https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
+hands.setOptions({maxNumHands:1,modelComplexity:1,minDetectionConfidence:0.65,minTrackingConfidence:0.60});
+hands.onResults(onResults);
+
+async function startCamera(){
+  try{
+    cameraStatus.innerHTML='<strong>Conectando:</strong> solicita permiso de cámara y espera unos segundos mientras se carga el reconocimiento de mano.';
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){throw new Error('getUserMedia no disponible. Abre la página en HTTPS o en localhost.');}
+    stream=await navigator.mediaDevices.getUserMedia({video:{width:{ideal:1280},height:{ideal:720},facingMode:'user'},audio:false});
+    video.srcObject=stream;
+    await video.play();
+    running=true;start.disabled=true;stop.disabled=false;
+    cameraState.textContent='Cámara activa';cameraDot.classList.remove('off');
+    cameraMsg.textContent='Cámara activa. Coloca una sola mano frente a ella.';
+    cameraStatus.innerHTML='<strong>Listo:</strong> la cámara está activa. Coloca una mano completa, con buena iluminación y los dedos separados.';
+    handStatus.textContent='Buscando mano...';
+    welcome.classList.add('hidden');
+    if(camera) camera.stop();
+    camera=new Camera(video,{onFrame:async()=>{if(running) await hands.send({image:video});},width:1280,height:720});
+    camera.start();
+  }catch(e){
+    console.error(e);
+    running=false;
+    cameraStatus.innerHTML='<strong class="error">No se pudo activar la cámara.</strong> Acepta el permiso del navegador y, si abriste el archivo directamente, usa un servidor local (por ejemplo VS Code + Live Server).';
+    cameraMsg.textContent='Permiso de cámara pendiente o bloqueado.';
+    handStatus.textContent='Cámara no disponible';
+  }
+}
+
+function stopCamera(){
+  running=false;
+  if(camera){camera.stop();camera=null;}
+  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
+  video.srcObject=null;ctx.clearRect(0,0,overlay.width,overlay.height);
+  start.disabled=false;stop.disabled=true;cameraState.textContent='Cámara inactiva';cameraDot.classList.add('off');
+  cameraMsg.textContent='Cámara detenida.';cameraStatus.innerHTML='<strong>Antes de comenzar:</strong> activa la cámara y permite el acceso cuando el navegador lo solicite.';
+  handStatus.textContent='Esperando cámara...';handMessage.innerHTML='Primero activa la cámara.<br>Después coloca una mano completa y bien iluminada.';dedos.textContent='0';lastCount=-1;stableFrames=0;
+}
+start.onclick=startCamera;stop.onclick=stopCamera;welcomeStart.onclick=startCamera;
+</script>
+</body>
+</html>
