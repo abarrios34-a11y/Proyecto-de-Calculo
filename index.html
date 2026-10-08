@@ -15,7 +15,7 @@ main{max-width:1500px;margin:24px auto;padding:0 24px}.dashboard{display:grid;gr
 .fingerBox{background:#101417;border:1px solid #30373d;border-radius:11px;padding:13px;margin-top:10px;display:flex;align-items:center;gap:12px}.fingerGraphic{font-size:37px;color:#aeb7c1}.fingerNum{font-size:26px;font-weight:800}.fingerLabel{color:#aaa;font-size:12px;margin-top:3px}.placeholder{min-height:120px;display:flex;align-items:center;justify-content:center;text-align:center;color:#c8cdd2;font-size:13px;background:#0a0d0f;border:1px solid #30373d;border-radius:11px;padding:18px;margin-top:10px}.instructions li{margin:9px 0 0 18px;font-size:13px;line-height:1.35;color:#e1e4e7}
 .info{display:grid;grid-template-columns:1fr;gap:10px}.intervalRow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.paramInput{width:100%;margin-top:2px;background:#080b0d;color:#fff;border:1px solid #3a4249;border-radius:8px;padding:9px;font-size:14px;outline:none}.paramInput:focus{border-color:var(--red);box-shadow:0 0 0 2px #ff263322}.paramHelp{font-size:11px;line-height:1.45;color:#9fa7af;background:#0a0d0f;border:1px solid #252c32;border-radius:9px;padding:9px}.field{background:#101417;border:1px solid #272e34;border-radius:11px;padding:11px}.field span{display:block;font-size:12px;color:#b2b9c0;margin-bottom:5px}.field b{font-size:14px;color:#f1f1f1}
 .graph{width:100%;height:270px;border:1px solid #30373d;border-radius:11px;background:#080b0d}.status{padding:12px;border-radius:10px;background:#101417;border-left:4px solid var(--red);font-size:13px;margin-top:10px;color:#ddd}.status strong{color:white}.resultBox{min-height:270px;display:flex;flex-direction:column;justify-content:center;gap:24px}.resultLine{font-size:16px}.resultLine b{display:block;font-size:14px;color:#bbb;margin-bottom:7px}.resultLine .value{font-size:22px;color:white}.resultLine .red{color:var(--red)}
-.interactionGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.interaction{background:#090c0e;border:1px solid var(--red);border-radius:12px;padding:15px;text-align:center;min-height:130px;display:flex;flex-direction:column;justify-content:center;gap:8px}.interaction .big{font-size:30px;color:var(--red)}.interaction b{font-size:16px}.interaction small{color:#b6bcc2;font-size:12px;line-height:1.3}.footer{text-align:center;color:#6f7881;font-size:12px;margin:18px 0}
+.interactionGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.interaction{background:#090c0e;border:1px solid var(--red);border-radius:12px;padding:15px;text-align:center;min-height:130px;display:flex;flex-direction:column;justify-content:center;gap:8px}.interaction .big{font-size:30px;color:var(--red)}.interaction b{font-size:16px}.interaction small{color:#b6bcc2;font-size:12px;line-height:1.3}.graph3d{width:100%;height:320px;background:#080b0d;border:1px solid #252b30;border-radius:10px;overflow:hidden;position:relative}.graph3d canvas{display:block;width:100%;height:100%}.graph3d .graph3dMsg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#d4d8dc;font-size:14px;text-align:center;pointer-events:none;padding:20px}.footer{text-align:center;color:#6f7881;font-size:12px;margin:18px 0}
 .welcome{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:20;display:flex;align-items:center;justify-content:center;padding:20px}.welcome.hidden{display:none}.welcomeBox{max-width:560px;width:100%;background:linear-gradient(145deg,#111518,#080a0c);border:1px solid #343a40;border-top:4px solid var(--red);border-radius:20px;padding:32px;text-align:center;box-shadow:0 20px 80px #000}.welcomeIcon{font-size:55px;color:var(--red);margin-bottom:12px}.welcome h1{font-size:28px;margin-bottom:10px}.welcome p{color:#c6cbd0;line-height:1.5;margin-bottom:20px}.steps{text-align:left;background:#0d1114;border:1px solid #2a3035;border-radius:12px;padding:16px;margin-bottom:20px}.steps div{margin:10px 0;color:#eee}.stepNum{display:inline-flex;width:25px;height:25px;border-radius:50%;background:var(--red);align-items:center;justify-content:center;font-weight:bold;margin-right:8px}.permissionNote{font-size:12px;color:#929aa2;margin-top:12px}.error{color:#ff6972}
 @media(max-width:1150px){.dashboard{grid-template-columns:1fr 1fr}.interactionGrid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:700px){header{padding:17px}.headerRight{display:none}.logo{font-size:25px}.dashboard{grid-template-columns:1fr}.interactionGrid{grid-template-columns:1fr 1fr}main{padding:0 12px}.welcomeBox{padding:24px}}
@@ -83,8 +83,8 @@ main{max-width:1500px;margin:24px auto;padding:0 24px}.dashboard{display:grid;gr
           <div class="field"><span>Inicio a:</span><input id="aInput" class="paramInput" type="number" step="any" value="-2"></div>
           <div class="field"><span>Final b:</span><input id="bInput" class="paramInput" type="number" step="any" value="2"></div>
         </div>
-        <div class="field"><span>Eje de revolución:</span><select id="ejeInput" class="paramInput"><option value="x">Eje X</option><option value="y">Eje Y</option></select></div>
-        <button class="btn" id="plotBtn">Graficar intervalo</button>
+        <div class="field"><span>Ejes de trabajo:</span><b>Eje X y Eje Y</b></div>
+        <button class="btn" id="plotBtn">Graficar intervalo</button><div id="plotStatus" class="status" style="margin-top:10px"><strong>Gráfica:</strong> lista para actualizar.</div>
         <div class="paramHelp">Puedes escribir cualquier intervalo numérico, por ejemplo <b>[-5, 3]</b>, <b>[0, 10]</b> o <b>[-π, π]</b>. La gráfica se ajusta automáticamente.</div>
       </div>
     </section>
@@ -96,8 +96,8 @@ main{max-width:1500px;margin:24px auto;padding:0 24px}.dashboard{display:grid;gr
 
   <div class="stack">
     <section class="card">
-      <div class="titleRow"><span class="titleIcon">▱</span><h2>Gráfica 2D</h2></div>
-      <canvas id="graph" class="graph" width="600" height="270"></canvas>
+      <div class="titleRow"><span class="titleIcon">▱</span><h2>Visualización 3D</h2></div>
+      <div id="graph3d" class="graph3d" aria-label="Visualización matemática en tres dimensiones"></div>
     </section>
     <section class="card">
       <div class="titleRow"><span class="titleIcon">Σ</span><h2>Resultado</h2></div>
@@ -124,6 +124,7 @@ main{max-width:1500px;margin:24px auto;padding:0 24px}.dashboard{display:grid;gr
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <script>
 const video=document.getElementById('video');
 const overlay=document.getElementById('overlay');
@@ -173,41 +174,151 @@ function readParams(){
   if(Number.isNaN(a)||Number.isNaN(b)) throw new Error('Escribe valores numéricos para a y b.');
   if(a===b) throw new Error('El intervalo debe tener dos extremos diferentes.');
   if(a>b){const t=a;a=b;b=t;document.getElementById('aInput').value=a;document.getElementById('bInput').value=b;}
-  return {expr,a,b,fn:makeFunction(expr),axis:document.getElementById('ejeInput').value};
+  return {expr,a,b,fn:makeFunction(expr),axis:'xy'};
 }
-function drawGraph(params){
-  const c=document.getElementById('graph'),x=c.getContext('2d'),w=c.width,h=c.height;
+function sampleFunction(params,n=700){
+  const pts=[]; let ymin=Infinity,ymax=-Infinity;
+  for(let i=0;i<=n;i++){
+    const xv=params.a+(params.b-params.a)*i/n;
+    let yv;
+    try{yv=params.fn(xv)}catch{yv=NaN}
+    if(Number.isFinite(yv)&&Math.abs(yv)<1e8){pts.push([xv,yv]);ymin=Math.min(ymin,yv);ymax=Math.max(ymax,yv)} else pts.push([xv,NaN]);
+  }
+  return {pts,ymin,ymax};
+}
+function graphFrame(c,params,samp){
+  const x=c.getContext('2d'),w=c.width,h=c.height;
   x.clearRect(0,0,w,h);
-  const n=700, pts=[]; let ymin=Infinity,ymax=-Infinity;
-  for(let i=0;i<=n;i++){const xv=params.a+(params.b-params.a)*i/n; let yv; try{yv=params.fn(xv)}catch{yv=NaN} if(Number.isFinite(yv)&&Math.abs(yv)<1e7){pts.push([xv,yv]);ymin=Math.min(ymin,yv);ymax=Math.max(ymax,yv)} else pts.push([xv,NaN]);}
-  if(!Number.isFinite(ymin)||!Number.isFinite(ymax)){drawEmptyGraph(x,'No se pudo graficar esta función en el intervalo.');return;}
-  if(Math.abs(ymax-ymin)<1e-9){ymin-=1;ymax+=1;} else {const pad=(ymax-ymin)*0.12;ymin-=pad;ymax+=pad;}
-  const xr=params.b-params.a, yr=ymax-ymin;
+  let ymin=samp.ymin,ymax=samp.ymax;
+  if(!Number.isFinite(ymin)||!Number.isFinite(ymax)) return null;
+  if(Math.abs(ymax-ymin)<1e-9){ymin-=1;ymax+=1;} else {const pad=(ymax-ymin)*.16;ymin-=pad;ymax+=pad;}
+  // Always include y=0 when possible, so the area/volume region is visible.
+  ymin=Math.min(ymin,0); ymax=Math.max(ymax,0);
+  const xr=params.b-params.a,yr=ymax-ymin;
   const sx=v=>(v-params.a)/xr*w, sy=v=>h-(v-ymin)/yr*h;
+  x.fillStyle='#080b0d';x.fillRect(0,0,w,h);
   x.strokeStyle='#20272d';x.lineWidth=1;
-  for(let i=0;i<=10;i++){let px=i*w/10,py=i*h/10;x.beginPath();x.moveTo(px,0);x.lineTo(px,h);x.stroke();x.beginPath();x.moveTo(0,py);x.lineTo(w,py);x.stroke();}
-  if(params.a<=0&&params.b>=0){let px=sx(0);x.strokeStyle='#9aa3ad';x.lineWidth=1.5;x.beginPath();x.moveTo(px,0);x.lineTo(px,h);x.stroke();}
-  if(ymin<=0&&ymax>=0){let py=sy(0);x.strokeStyle='#9aa3ad';x.lineWidth=1.5;x.beginPath();x.moveTo(0,py);x.lineTo(w,py);x.stroke();}
-  // Área sombreada para la interacción de 1 dedo.
-  x.fillStyle='rgba(255,38,51,.18)';x.beginPath();let started=false;
-  for(const [xx,yy] of pts){if(!Number.isFinite(yy)){started=false;continue}let px=sx(xx),py=sy(yy),p0=sy(0);if(!started){x.moveTo(px,p0);x.lineTo(px,py);started=true}else{x.lineTo(px,py);}}
-  if(started){x.lineTo(sx(params.b),sy(0));x.closePath();x.fill();}
-  x.strokeStyle='#ff2633';x.lineWidth=3;x.beginPath();started=false;
-  for(const [xx,yy] of pts){if(!Number.isFinite(yy)){started=false;continue}let px=sx(xx),py=sy(yy);if(!started){x.moveTo(px,py);started=true}else{x.lineTo(px,py);}}
-  x.stroke();
-  x.fillStyle='#d8dde1';x.font='12px Arial';x.fillText(String(params.a),5,h-7);x.fillText(String(params.b),w-35,h-7);x.fillText('x',w-15,h/2-6);x.fillText('y',w/2+6,14);
+  for(let i=0;i<=10;i++){const px=i*w/10,py=i*h/10;x.beginPath();x.moveTo(px,0);x.lineTo(px,h);x.stroke();x.beginPath();x.moveTo(0,py);x.lineTo(w,py);x.stroke();}
+  if(params.a<=0&&params.b>=0){const px=sx(0);x.strokeStyle='#9aa3ad';x.lineWidth=1.5;x.beginPath();x.moveTo(px,0);x.lineTo(px,h);x.stroke();}
+  if(ymin<=0&&ymax>=0){const py=sy(0);x.strokeStyle='#9aa3ad';x.lineWidth=1.5;x.beginPath();x.moveTo(0,py);x.lineTo(w,py);x.stroke();}
+  return {x,w,h,sx,sy,ymin,ymax};
 }
-function drawEmptyGraph(x,msg){const c=document.getElementById('graph'),w=c.width,h=c.height;x.fillStyle='#d4d8dc';x.font='14px Arial';x.textAlign='center';x.fillText(msg,w/2,h/2);x.textAlign='left';}
-let currentParams={expr:'x^2',a:-2,b:2,fn:x=>x*x,axis:'x'};
+function drawCurve(frame,samp){
+  const {x,sx,sy}=frame;x.strokeStyle='#ff2633';x.lineWidth=3;x.beginPath();let started=false;
+  for(const [xx,yy] of samp.pts){if(!Number.isFinite(yy)){started=false;continue}const px=sx(xx),py=sy(yy);if(!started){x.moveTo(px,py);started=true}else x.lineTo(px,py);}x.stroke();
+}
+function drawArea(frame,samp){
+  const {x,sx,sy}=frame;x.fillStyle='rgba(255,38,51,.22)';x.beginPath();let started=false;
+  for(const [xx,yy] of samp.pts){if(!Number.isFinite(yy)){if(started){x.lineTo(sx(xx),sy(0));x.closePath();x.fill();x.beginPath()}started=false;continue}const px=sx(xx),py=sy(yy),p0=sy(0);if(!started){x.moveTo(px,p0);x.lineTo(px,py);started=true}else x.lineTo(px,py);}
+  if(started){x.lineTo(sx(frame.params.b),sy(0));x.closePath();x.fill();} drawCurve(frame,samp);
+}
+function drawVerticalSlices(frame,samp,mode){
+  const {x,sx,sy,w,h}=frame; const N=42;
+  x.save();
+  for(let i=0;i<N;i+=2){const xv=frame.params.a+(frame.params.b-frame.params.a)*i/N; let y;try{y=frame.params.fn(xv)}catch{continue} if(!Number.isFinite(y))continue;
+    const px=sx(xv),py=sy(y),p0=sy(0),radius=Math.max(2,Math.min(h*.28,Math.abs(py-p0)));
+    if(mode==='x'){
+      const g=x.createLinearGradient(px,0,px+radius,0);g.addColorStop(0,'rgba(255,38,51,.55)');g.addColorStop(1,'rgba(255,38,51,.05)');x.fillStyle=g;x.fillRect(px-radius*.35,Math.min(py,p0),radius*.7,Math.abs(p0-py));
+    } else {
+      x.fillStyle='rgba(255,38,51,.28)';x.beginPath();x.ellipse(px,h/2,radius*.35,Math.max(3,Math.abs(py-p0)*.28),0,0,Math.PI*2);x.fill();
+    }
+  }
+  x.restore();drawCurve(frame,samp);
+  x.fillStyle='#d8dde1';x.font='13px Arial';x.fillText(mode==='x'?'Revolución alrededor del eje X':'Revolución alrededor del eje Y',12,20);
+}
+function derivative(fn,x,h){const d=Math.max(1e-5,Math.min(1e-3,Math.abs(h)));try{return (fn(x+d)-fn(x-d))/(2*d)}catch{return NaN}}
+function calculateForGesture(params,count){
+  if(count===1)return {formula:'∫ₐᵇ f(x) dx',value:numericalIntegral(params.fn,params.a,params.b),unit:'u²'};
+  if(count===2)return {formula:'π∫ₐᵇ [f(x)]² dx',value:Math.PI*numericalIntegral(params.fn,params.a,params.b,(v)=>v*v),unit:'u³'};
+  if(count===3)return {formula:'2π∫ₐᵇ |x·f(x)| dx',value:2*Math.PI*numericalIntegral(params.fn,params.a,params.b,(v,x)=>Math.abs(x*v)),unit:'u³'};
+  if(count===4){const d=params.b-params.a;return {formula:'2π∫ₐᵇ |f(x)|√(1+[f\'(x)]²) dx',value:2*Math.PI*numericalIntegral(params.fn,params.a,params.b,(v,x)=>{const q=derivative(params.fn,x,d/500);return Math.abs(v)*Math.sqrt(1+q*q)}),unit:'u²'};}
+  if(count===5){const d=params.b-params.a;return {formula:'∫ₐᵇ √(1+[f\'(x)]²) dx',value:numericalIntegral(params.fn,params.a,params.b,(v,x)=>{const q=derivative(params.fn,x,d/500);return Math.sqrt(1+q*q)}),unit:'u'};}
+  return null;
+}
+let scene3d=null, camera3d=null, renderer3d=null, root3d=null, animation3d=null, resize3d=null;
+function init3D(){
+  const host=document.getElementById('graph3d');
+  if(!window.THREE){host.innerHTML='<div class="graph3dMsg">No se pudo cargar el motor 3D. Revisa tu conexión a Internet.</div>';return false;}
+  if(renderer3d) return true;
+  scene3d=new THREE.Scene(); scene3d.background=new THREE.Color(0x080b0d);
+  camera3d=new THREE.PerspectiveCamera(45,host.clientWidth/host.clientHeight,0.1,2000);
+  camera3d.position.set(6,4.5,8); camera3d.lookAt(0,0,0);
+  renderer3d=new THREE.WebGLRenderer({antialias:true}); renderer3d.setPixelRatio(Math.min(window.devicePixelRatio||1,2)); renderer3d.setSize(host.clientWidth,host.clientHeight); host.innerHTML=''; host.appendChild(renderer3d.domElement);
+  const amb=new THREE.AmbientLight(0xffffff,1.8); scene3d.add(amb);
+  const key=new THREE.DirectionalLight(0xffffff,2.2); key.position.set(5,8,6); scene3d.add(key);
+  root3d=new THREE.Group(); scene3d.add(root3d);
+  const grid=new THREE.GridHelper(14,14,0x33383d,0x20252a); grid.position.y=-1.2; root3d.add(grid);
+  const axes=new THREE.AxesHelper(5); root3d.add(axes);
+  resize3d=()=>{const w=host.clientWidth,h=host.clientHeight;if(w&&h){camera3d.aspect=w/h;camera3d.updateProjectionMatrix();renderer3d.setSize(w,h);}};
+  window.addEventListener('resize',resize3d);
+  const clock3d=new THREE.Clock();
+  const animate=()=>{
+    animation3d=requestAnimationFrame(animate);
+    const t=clock3d.getElapsedTime();
+    // Movimiento continuo para que la visualización 3D no quede estática.
+    if(root3d){
+      root3d.rotation.y = t*0.45;
+      root3d.rotation.x = Math.sin(t*0.35)*0.10;
+      // La geometría se mueve suavemente según el gesto activo.
+      if(window.__gesture3d===1){ root3d.position.y=Math.sin(t*2.0)*0.08; }
+      else if(window.__gesture3d===2){ root3d.position.y=Math.sin(t*1.6)*0.12; }
+      else if(window.__gesture3d===3){ root3d.position.y=Math.cos(t*1.8)*0.12; }
+      else if(window.__gesture3d===4){ root3d.position.y=Math.sin(t*2.2)*0.07; }
+      else if(window.__gesture3d===5){ root3d.position.y=Math.sin(t*2.5)*0.06; }
+      else { root3d.position.y=0; }
+    }
+    renderer3d.render(scene3d,camera3d);
+  }; animate();
+  return true;
+}
+function clear3D(){if(!root3d)return; while(root3d.children.length>2){const o=root3d.children.pop();o.traverse(n=>{if(n.geometry)n.geometry.dispose();if(n.material){if(Array.isArray(n.material))n.material.forEach(m=>m.dispose());else n.material.dispose();}});} }
+function addAxesLabels(){
+  const mat=new THREE.SpriteMaterial({color:0xffffff});
+  const make=(txt,pos)=>{const c=document.createElement('canvas'),x=c.getContext('2d');c.width=128;c.height=48;x.fillStyle='white';x.font='bold 28px Arial';x.fillText(txt,8,32);const tex=new THREE.CanvasTexture(c);const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true}));sp.scale.set(1.3,.5,1);sp.position.copy(pos);root3d.add(sp);};
+  make('X',new THREE.Vector3(5.3,-1.1,0));make('Y',new THREE.Vector3(0,4.8,0));make('Z',new THREE.Vector3(0,-1.1,5.3));
+}
+function makeCurvePoints(params){
+  const pts=[]; const N=160; const span=Math.max(1e-9,params.b-params.a); let maxAbs=0;
+  for(let i=0;i<=N;i++){const x=params.a+span*i/N;let y;try{y=params.fn(x)}catch{y=NaN}if(Number.isFinite(y)&&Math.abs(y)<1e6){pts.push({x,y});maxAbs=Math.max(maxAbs,Math.abs(x),Math.abs(y));}else pts.push({x,y:NaN});}
+  return {pts,maxAbs:Math.max(maxAbs,1)};
+}
+function fit3DScale(data){return Math.min(4.8/Math.max(Math.abs(data.pts[0].x),Math.abs(data.pts[data.pts.length-1].x),1),3.2/data.maxAbs);}
+function addCurve3D(params,data,scale){
+  const verts=[];for(const q of data.pts)if(Number.isFinite(q.y))verts.push(q.x*scale,q.y*scale,0);
+  const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));const line=new THREE.Line(geo,new THREE.LineBasicMaterial({color:0xff2633}));root3d.add(line);
+}
+function addArea3D(params,data,scale){
+  const verts=[],N=160;for(let i=0;i<N;i++){const q=data.pts[i],q2=data.pts[i+1];if(!Number.isFinite(q.y)||!Number.isFinite(q2.y))continue;const x1=q.x*scale,x2=q2.x*scale,y1=q.y*scale,y2=q2.y*scale;verts.push(x1,0,0,x1,y1,0,x2,y2,0,x2,0,0);}
+  const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));const idx=[];for(let i=0;i<verts.length/12;i++){const b=i*4;idx.push(b,b+1,b+2,b,b+2,b+3);}geo.setIndex(idx);geo.computeVertexNormals();root3d.add(new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xff2633,transparent:true,opacity:.42,side:THREE.DoubleSide})));addCurve3D(params,data,scale);
+}
+function addRevolutionX(params,data,scale,wire=false){
+  const valid=data.pts.filter(q=>Number.isFinite(q.y));const nx=Math.min(100,valid.length),nt=48;const pos=[];const idx=[];
+  for(let i=0;i<nx;i++){const q=valid[Math.floor(i*(valid.length-1)/(nx-1))],x=q.x*scale,r=Math.abs(q.y*scale);for(let j=0;j<nt;j++){const t=j/nt*Math.PI*2;pos.push(x,r*Math.cos(t),r*Math.sin(t));}}
+  for(let i=0;i<nx-1;i++)for(let j=0;j<nt;j++){const a=i*nt+j,b=i*nt+(j+1)%nt,c=(i+1)*nt+(j+1)%nt,d=(i+1)*nt+j;idx.push(a,b,d,b,c,d);}const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));geo.setIndex(idx);geo.computeVertexNormals();root3d.add(new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xff2633,transparent:true,opacity:wire?.25:.58,side:THREE.DoubleSide,wireframe:wire})));
+}
+function addRevolutionY(params,data,scale,wire=false){const valid=data.pts.filter(q=>Number.isFinite(q.y));const nx=Math.min(100,valid.length),nt=48,pos=[],idx=[];for(let i=0;i<nx;i++){const q=valid[Math.floor(i*(valid.length-1)/(nx-1))],y=q.y*scale,r=Math.abs(q.x*scale);for(let j=0;j<nt;j++){const t=j/nt*Math.PI*2;pos.push(r*Math.cos(t),y,r*Math.sin(t));}}for(let i=0;i<nx-1;i++)for(let j=0;j<nt;j++){const a=i*nt+j,b=i*nt+(j+1)%nt,c=(i+1)*nt+(j+1)%nt,d=(i+1)*nt+j;idx.push(a,b,d,b,c,d);}const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));geo.setIndex(idx);geo.computeVertexNormals();root3d.add(new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0xff2633,transparent:true,opacity:wire?.25:.58,side:THREE.DoubleSide,wireframe:wire})));}
+function drawGraph(params,count=0){
+  window.__gesture3d=count;
+  if(!init3D())return;clear3D();addAxesLabels();const data=makeCurvePoints(params);const scale=fit3DScale(data);
+  if(count===1)addArea3D(params,data,scale);
+  else if(count===2)addRevolutionX(params,data,scale,false);
+  else if(count===3)addRevolutionY(params,data,scale,false);
+  else if(count===4)addRevolutionX(params,data,scale,true);
+  else addCurve3D(params,data,scale);
+  const host=document.getElementById('graph3d');const old=host.querySelector('.graph3dMsg');if(old)old.remove();
+  if(count>=1&&count<=5){const labels=['','Área bajo la curva','Sólido de revolución alrededor del eje X','Sólido de revolución alrededor del eje Y','Área superficial del sólido','Longitud de arco'];const msg=document.createElement('div');msg.className='graph3dMsg';msg.style.justifyContent='flex-start';msg.style.alignItems='flex-start';msg.style.fontWeight='700';msg.style.textShadow='0 1px 3px #000';msg.textContent=labels[count];host.appendChild(msg);}
+  resize3d&&resize3d();
+}
+function drawEmptyGraph(x,msg){const host=document.getElementById('graph3d');let m=host.querySelector('.graph3dMsg');if(!m){m=document.createElement('div');m.className='graph3dMsg';host.appendChild(m);}m.textContent=msg;}
+let currentParams={expr:'x^2',a:-2,b:2,fn:x=>x*x,axis:'xy'};
 function updateParams(){
   try{
     currentParams=readParams();
-    document.getElementById('funcion').textContent=currentParams.expr;
-    document.getElementById('intervalo').textContent='['+currentParams.a+', '+currentParams.b+']';
-    document.getElementById('eje').textContent=currentParams.axis==='x'?'Eje X':'Eje Y';
-    drawGraph(currentParams);
-    document.getElementById('cameraStatus').innerHTML='<strong>Gráfica actualizada:</strong> '+currentParams.expr+' en ['+currentParams.a+', '+currentParams.b+'].';
-  }catch(e){document.getElementById('cameraStatus').innerHTML='<strong class="error">Error:</strong> '+e.message;}
+    drawGraph(currentParams, stableCount);
+    document.getElementById('plotStatus').innerHTML='<strong>Gráfica actualizada:</strong> '+currentParams.expr+' en ['+currentParams.a+', '+currentParams.b+']. Ejes X y Y activos.';
+    document.getElementById('cameraStatus').innerHTML='<strong>Listo:</strong> función e intervalo actualizados. Los gestos cambiarán la visualización.';
+    if(stableCount>=1&&stableCount<=5) updateGesture(stableCount);
+  }catch(e){document.getElementById('plotStatus').innerHTML='<strong class="error">Error:</strong> '+e.message;document.getElementById('cameraStatus').innerHTML='<strong class="error">Error:</strong> '+e.message;drawEmptyGraph(document.getElementById('graph').getContext('2d'),'Corrige la función o el intervalo.');}
 }
 document.getElementById('plotBtn').addEventListener('click',updateParams);
 document.getElementById('aInput').addEventListener('keydown',e=>{if(e.key==='Enter')updateParams()});
@@ -228,19 +339,44 @@ function countFingers(lm){
   return Math.max(0,Math.min(5,count));
 }
 
-function numericalIntegral(fn,a,b){const n=1000;const h=(b-a)/n;let sum=fn(a)+fn(b);for(let i=1;i<n;i++)sum+=(i%2?4:2)*fn(a+i*h);return sum*h/3;}
+// Integral numérica de Simpson. Soporta una transformación opcional del integrando.
+function numericalIntegral(fn,a,b,transform=null){
+  const n=1000;
+  const h=(b-a)/n;
+  const valueAt=(x)=>{
+    const v=fn(x);
+    return transform ? transform(v,x) : v;
+  };
+  let fa=valueAt(a), fb=valueAt(b);
+  if(!Number.isFinite(fa)||!Number.isFinite(fb)) return NaN;
+  let sum=fa+fb;
+  for(let i=1;i<n;i++){
+    const x=a+i*h;
+    const v=valueAt(x);
+    if(!Number.isFinite(v)) return NaN;
+    sum+=(i%2?4:2)*v;
+  }
+  return sum*h/3;
+}
 function updateGesture(count){
+  window.__gesture3d=count;
   dedos.textContent=count;
-  if(count===1){try{const val=numericalIntegral(currentParams.fn,currentParams.a,currentParams.b);document.getElementById('integral').textContent='∫ f(x) dx';document.getElementById('resultado').textContent=Number.isFinite(val)?val.toFixed(4):'—';document.getElementById('unidades').textContent='u²';}catch{}}
   if(count>=1 && count<=5){
     const a=actions[count];
     accion.innerHTML='<b>'+a[0]+'</b><br><span style="color:#b6bcc2;font-size:12px">'+a[1]+'</span>';
     gestureIcon.textContent=a[2];
     handMessage.innerHTML='<b>Mano detectada correctamente.</b><br>Gesto reconocido: '+count+' dedo'+(count===1?'':'s')+'.';
+    drawGraph(currentParams,count);
+    const calc=calculateForGesture(currentParams,count);
+    document.getElementById('integral').textContent=calc?calc.formula:'—';
+    document.getElementById('resultado').textContent=calc&&Number.isFinite(calc.value)?calc.value.toFixed(4):'—';
+    document.getElementById('unidades').textContent=calc?calc.unit:'—';
+    document.getElementById('plotStatus').innerHTML='<strong>Gesto activo:</strong> '+a[0]+'. La visualización se actualizó automáticamente.';
   }else{
     accion.innerHTML='Muestra un gesto con <b>1 a 5 dedos</b><br>para ejecutar una acción.';
     gestureIcon.textContent='✋';
     handMessage.innerHTML='No se detecta una cantidad válida.<br>Coloca la mano completa y separa los dedos.';
+    drawGraph(currentParams,0);
   }
 }
 
